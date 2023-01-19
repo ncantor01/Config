@@ -1,3 +1,5 @@
+URxvt.perl-ext-common: default,matcher,url-select,tabbed,resize-font
+
 !! Colorscheme
 
 ! special
@@ -39,14 +41,14 @@
 
 
 !! URxvt Appearance
-URxvt.font: xft:Iosevka:style=Regular:size=12
-URxvt.boldFont: xft:Iosevka:style=Bold:size=12
+URxvt.font: xft:Agave:style=Regular:size=12
+URxvt.boldFont: xft:Agave:style=Bold:size=12
 URxvt.italicFont: xft:Iosevka:style=Italic:size=12
 URxvt.boldItalicfont: xft:Iosevka:style=Bold Italic:size=12
 URxvt.letterSpace: 0
 URxvt.lineSpace: 0
 URxvt.geometry: 92x24
-#URxvt.internalBorder: 24
+!URxvt.internalBorder: 24
 URxvt.cursorBlink: true
 URxvt.cursorUnderline: false
 URxvt.saveline: 2048
@@ -55,3 +57,14 @@ URxvt.scrollBar_right: false
 URxvt.urgentOnBell: true
 URxvt.depth: 24
 URxvt.iso14755: false
+
+!!URLS
+URxvt.matcher.rend.0: Uline Bold fg5
+URxvt.urlLauncher: firefox
+URxvt.underlineURLs: true
+URxvt.matcher.button: 1
+URxvt.keysym.C-Delete: perl:matcher:last
+URxvt.keysym.M-Delete: perl:matcher:list
+!!Hotkeys
+Urxvt.keysym.Control-t: command:tmux
+

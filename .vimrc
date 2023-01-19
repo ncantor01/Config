@@ -34,15 +34,12 @@ set cursorline
 " Show partial command you type in the last line of the screen.
  set showcmd
 
- " Enable auto completion menu after pressing TAB.
-  set wildmenu
- 
-  " Make wildmenu behave like similar to Bash completion.
-  set wildmode=list:longest
- 
-  " There are certain files that we would never want to edit with Vim.
-  " Wildmenu will ignore files with these extensions.
-  set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+  set nocompatible
+  filetype off
+  set encoding=utf-8
+
+  set updatetime=300
+  set signcolumn=yes
 
   call plug#begin('~/.vim/plugged')
     Plug 'sainnhe/everforest'
@@ -54,11 +51,7 @@ set cursorline
     Plug 'junegunn/seoul256.vim'
     Plug 'junegunn/vim-journal'
     Plug 'junegunn/rainbow_parentheses.vim'
-    Plug 'nightsense/forgotten'
     Plug 'zaki/zazen'
-    
-    " Aethetics - Additional
-     Plug 'nightsense/nemo'
      Plug 'https://github.com/altercation/vim-colors-solarized'
      Plug 'yuttie/hydrangea-vim'
      Plug 'chriskempson/tomorrow-theme', { 'rtp': 'vim' }
@@ -89,17 +82,22 @@ set cursorline
      Plug 'KabbAmine/vCoolor.vim'
      Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
      Plug 'vim-scripts/loremipsum'
-     Plug 'SirVer/ultisnips'
      Plug 'honza/vim-snippets'
      Plug 'metakirby5/codi.vim'
      Plug 'dkarter/bullets.vim'
      Plug 'https://github.com/edwinb/idris2-vim'
      Plug 'neovimhaskell/haskell-vim'
      Plug 'https://github.com/fatih/vim-go'
-     Plug 'vim-scripts/indentpython.vim'
      Plug 'kien/ctrlp.vim'
      Plug 'https://github.com/pulkomandy/c.vim'
-  call plug#end()
+     "rust
+     Plug 'prabirshrestha/vim-lsp'
+     Plug 'rust-lang/rust.vim'
+     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+     Plug 'dense-analysis/ale'
+     "sml
+     Plug 'myegorov/schmerlin'
+     call plug#end()
 
   set background=dark
   colorscheme seoul256
@@ -108,3 +106,54 @@ set cursorline
   set guicursor+=i:ver100-iCursor
   set guicursor+=n-v-c:blinkon0
   set guicursor+=i:blinkwait10
+
+  "nerdtree
+  nnoremap <leader>n :NERDTreeFocus<CR> 
+  nnoremap <C-n> :NERDTree<CR> 
+  nnoremap <C-t> :NERDTreeToggle<CR> 
+  nnoremap <C-f> :NERDTreeFind<CR>
+
+  "rust-analyzer
+  if executable('rust-analyzer')
+  au User lsp_setup call lsp#register_server({
+        \   'name': 'Rust Language Server',
+        \   'cmd': {server_info->['rust-analyzer']},
+        \   'whitelist': ['rust'],
+        \ })
+  endif
+
+  "rust config
+  let g:rustfmt_autosave = 1
+  let g:rustfmt_emit_files = 1
+  let g:rustfmt_fail_silently = 0
+
+  inoremap <silent><expr> <TAB>
+        \ coc#pum#visible() ? "\<C-n>"
+        \ CheckBackspace() ? "\<TAB>" :
+        \ coc#refresh()
+
+  inoremap <expr><S-TAB> coc#pum#visible() ? "\<C-p>" : "\<C-h>"
+  
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+  endfunction
+
+  if has('nvim')
+    inoremap <silent><expr> <c-space> coc#refresh()
+  else
+    inoremap <silent><expr> <c-@> coc#refresh()
+  endif
+
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
+
+  "sml
+  autocmd BufNewFile,BufRead *.sml set filetype=sml
+  "misc
+  set nowrap
+
+  
+
