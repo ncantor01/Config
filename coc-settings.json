@@ -1,4 +1,6 @@
 {
+  "coc.preferences.jumpCommand": "tabe",
+  "colors.enable": true,
   "languageserver": {
     "terraform": {
             "command": "terraform-ls",
