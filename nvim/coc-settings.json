@@ -1,0 +1,45 @@
+{
+  "coc.preferences.jumpCommand": "tabe",
+  "colors.enable": true,
+  "languageserver": {
+    "terraform": {
+            "command": "terraform-ls",
+                  "args": ["serve"],
+                  "filetypes": [
+                            "terraform",
+                                    "tf"
+                                          
+                  ],
+                        "initializationOptions": {},
+                              "settings": {}
+                                  
+    }      
+  }
+  
+}
+
+{
+  "python.analysis.extraPaths": [
+        "./venv/lib/python3.8/site-packages"  // Add your virtual environment paths here
+          
+  ],
+  "python.autoComplete.extraPaths": [
+        "./venv/lib/python3.8/site-packages"  // Add your virtual environment paths here
+          
+  ],
+    "python.formatting.provider": "black",   // Use 'black' for formatting
+    "python.linting.enabled": true,          // Enable linting
+    "python.linting.flake8Enabled": true,    // Enable flake8
+    "python.linting.flake8Args": ["--ignore=E501"],  // Example: ignore line length issues
+    "python.analysis.memory.keepLibraryAst": true, // Keep library AST for better performance
+    "python.analysis.memory.keepLibraryAstTime": 60, // Time (in minutes) to keep library AST in memory
+    "python.analysis.typeshedPaths": ["./typeshed"], // Specify path to typeshed (optional)
+    "python.analysis.autoSearchPaths": true, // Automatically search for python interpreter and typeshed
+    "python.analysis.logLevel": "info", // Set log level for Pyright
+    "python.analysis.autoImportCompletions": true, // Automatically import completions
+    "python.analysis.diagnosticMode": "workspace", // Specify diagnostic mode
+    "python.formatting.blackArgs": ["--line-length=88"] // Specify black formatting arguments
+                              
+}
+
+
