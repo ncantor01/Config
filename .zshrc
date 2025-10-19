@@ -126,7 +126,7 @@ export PATH=$PATH:$JAVA_HOME/bin/
   [ -s "$NVM_DIR/nvm.sh"  ] && . "$NVM_DIR/nvm.sh"
 
 
-functio aws_login() {
+function aws_login() {
         # Check if the profile name is provided
         if [ -z "$1"  ]; then
          echo "Please provide the profile name."
@@ -147,6 +147,13 @@ functio aws_login() {
         echo "Logged in to AWS profile '$1' and credentials are exported as environment variables."
 }
 
+export XDG_CONFIG_HOME="$HOME/.config"
+
 eval "$(register-python-argcomplete clif)"
 
-export XDG_CONFIG_HOME="$HOME/.config"
+alias aws-sso-ai-sandbox='export AWS_PROFILE=prod-eng-ai-sandbox; aws sso login'
+
+[ -f "/home/ncantor/.ghcup/env" ] && . "/home/ncantor/.ghcup/env" # ghcup-env
+
+eval "$(register-python-argcomplete clif)"
+export PATH="/home/linuxbrew/.linuxbrew/opt/mysql-client@8.4/bin:$PATH"
